@@ -2,13 +2,15 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
 <title>چت پلاس 💬</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Vazirmatn',Tahoma,sans-serif; -webkit-tap-highlight-color:transparent; }
-body { background:#030726; min-height:100vh; color:white; overflow-x:hidden; }
+html { font-size:16px; -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+body { background:#030726; min-height:100vh; color:white; overflow-x:hidden; font-size:14px; }
 .bg { position:fixed; inset:0; z-index:-1; background:radial-gradient(ellipse at top, #0a1f5c 0%, #030726 60%, #000510 100%); }
 .bg::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 15% 20%, rgba(59,130,246,0.25) 0%, transparent 50%), radial-gradient(circle at 85% 80%, rgba(99,102,241,0.2) 0%, transparent 50%); animation:pulse 8s ease-in-out infinite; }
 @keyframes pulse { 0%,100%{opacity:0.6;} 50%{opacity:1;} }
@@ -448,7 +450,7 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
     </div>
     <button class="btn danger" onclick="closeAdminPanel()" style="margin-top:16px;">بستن</button>
   </div>
-  </div><script>
+</div><script>
 const SUPABASE_URL = 'https://dznjirjgxqfkdulriqxy.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_U4RPxsx_VUcldfgyH46Npw_Xp1xfiol';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -956,7 +958,7 @@ function subscribeRealtime() {
       renderUsersMini();
     })
     .subscribe();
-}function buildEmojiPicker() {
+  }function buildEmojiPicker() {
   const grid = document.getElementById('emoji-grid');
   if (!grid) return;
   grid.innerHTML = EMOJIS.map(e => '<div class="emoji-item" onclick="insertEmoji(\'' + e + '\')">' + e + '</div>').join('');
@@ -1154,7 +1156,7 @@ async function loadReports() {
     allReports = data || [];
     if (isAdmin) renderAdminReports();
   } catch(e) { console.warn(e); }
-}function openSidebar() {
+  }function openSidebar() {
   document.getElementById('sidebar').classList.add('active');
   document.getElementById('sidebar-overlay').classList.add('active');
   renderAccountsList();
