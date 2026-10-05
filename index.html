@@ -725,15 +725,62 @@ function switchChatTab(tab) {
     bar.style.display = 'flex';
     if (replyTarget.group) replyBar.classList.add('active');
   } else {
-    renderPvList();
+    loadPvChatsList();
     bar.style.display = 'none';
     replyBar.classList.remove('active');
   }
 }
 
-function renderPvList() {
+async function loadPvChatsList() {
   const room = document.getElementById('chat-room');
-  room.innerHTML = '<div style="padding:10px;font-size:13px;color:#94a3b8;text-align:center;">💌 برای شروع چت خصوصی، از سایدبار ☰ کاربری رو انتخاب کن</div>';
+  room.innerHTML = '<div class="loader">در حال بارگذاری چت‌ها</div>';
+  try {
+    const { data, error } = await sb.from('private_messages')
+      .select('*')
+      .or('from_user_id.eq.' + currentUser.id + ',to_user_id.eq.' + currentUser.id)
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    const chatsMap = {};
+    (data || []).forEach(m => {
+      const otherId = m.from_user_id === currentUser.id ? m.to_user_id : m.from_user_id;
+      if (!chatsMap[otherId]) {
+        chatsMap[otherId] = m;
+      }
+    });
+    const chats = Object.values(chatsMap);
+    renderPvChatsList(chats);
+  } catch(e) {
+    room.innerHTML = '<div class="empty">❌ خطا: ' + e.message + '</div>';
+  }
+}
+
+function renderPvChatsList(chats) {
+  const room = document.getElementById('chat-room');
+  if (!chats.length) {
+    room.innerHTML = '<div class="empty">💌<br>هنوز چت خصوصی نداری<br><br>از سایدبار ☰ روی یه کاربر بزن و «شروع چت خصوصی» رو بزن</div>';
+    return;
+  }
+  let html = '';
+  chats.forEach(m => {
+    const otherId = m.from_user_id === currentUser.id ? m.to_user_id : m.from_user_id;
+    const otherUser = allUsersCache.find(u => u.id === otherId);
+    if (!otherUser) return;
+    const av = otherUser.avatar_url ? 'background-image:url(' + otherUser.avatar_url + ');' : '';
+    const online = isOnline(otherUser);
+    const preview = (m.text || '').substring(0, 40) + ((m.text || '').length > 40 ? '...' : '');
+    html += '<div class="user-mini" onclick="startPvChat(' + otherId + ')" style="padding:12px;margin-bottom:8px;align-items:center;">' +
+      '<div class="avatar-mini" style="' + av + ';width:46px;height:46px;font-size:18px;flex-shrink:0;">' +
+        (otherUser.avatar_url ? '' : getInitial(otherUser.display_name)) +
+        '<div class="' + (online ? 'online-dot' : 'offline-dot') + '"></div>' +
+      '</div>' +
+      '<div class="info" style="flex:1;overflow:hidden;margin-right:8px;">' +
+        '<div class="n" style="font-size:14px;">' + escapeHtml(otherUser.display_name) + verifiedBadge(otherUser.is_verified) + '</div>' +
+        '<div class="u" style="font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + escapeHtml(preview) + '</div>' +
+      '</div>' +
+      '<div style="font-size:10px;color:#64748b;flex-shrink:0;">' + timeAgo(m.created_at) + '</div>' +
+    '</div>';
+  });
+  room.innerHTML = html;
 }
 
 async function loadMessages() {
