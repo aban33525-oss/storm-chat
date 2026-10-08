@@ -5,11 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>چت پلاس 💬</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<link rel="manifest" href="/storm-chat/manifest.json">
-<meta name="theme-color" content="#3b82f6">
-<link rel="icon" type="image/png" href="https://aban33525-oss.github.io/storm-chat/icon-192.png">
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Vazirmatn',Tahoma,sans-serif; -webkit-tap-highlight-color:transparent; }
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:Tahoma,Arial,sans-serif; -webkit-tap-highlight-color:transparent; }
 html { font-size:16px; -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 body { background:#0a0e27; min-height:100vh; color:white; overflow-x:hidden; font-size:14px; }
 .bg { position:fixed; inset:0; z-index:-1; background:radial-gradient(ellipse at top, #1a1e4a 0%, #0a0e27 50%, #05071a 100%); }
@@ -28,10 +25,10 @@ body { background:#0a0e27; min-height:100vh; color:white; overflow-x:hidden; fon
 .logo-icon { font-size:80px; line-height:1; filter:drop-shadow(0 0 30px #60a5fa); }
 .logo-title { font-size:42px; font-weight:800; margin-top:10px; background:linear-gradient(135deg,#60a5fa,#a78bfa,#60a5fa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 .logo-sub { font-size:13px; color:#93c5fd; margin-top:6px; opacity:0.85; }
-.tabs { display:flex; gap:8px; margin-bottom:20px; background:rgba(15,23,42,0.6); backdrop-filter:blur(20px); padding:6px; border-radius:18px; border:1px solid rgba(96,165,250,0.25); }
+.tabs { display:flex; gap:8px; margin-bottom:20px; background:rgba(15,23,42,0.6); padding:6px; border-radius:18px; border:1px solid rgba(96,165,250,0.25); }
 .tab-btn { flex:1; padding:13px; text-align:center; font-weight:700; font-size:15px; color:#94a3b8; cursor:pointer; border-radius:14px; transition:all 0.25s; }
 .tab-btn.active { background:linear-gradient(135deg,#3b82f6,#8b5cf6); color:white; box-shadow:0 4px 20px rgba(99,102,241,0.5); }
-.card { background:rgba(15,23,42,0.7); backdrop-filter:blur(20px); border:1px solid rgba(96,165,250,0.25); border-radius:26px; padding:26px 22px; box-shadow:0 20px 60px rgba(0,0,0,0.5); }
+.card { background:rgba(15,23,42,0.7); border:1px solid rgba(96,165,250,0.25); border-radius:26px; padding:26px 22px; box-shadow:0 20px 60px rgba(0,0,0,0.5); }
 .input-group { margin-bottom:14px; }
 .input-group label { display:block; font-size:12px; color:#93c5fd; margin-bottom:6px; font-weight:600; }
 .input { width:100%; padding:15px 18px; background:rgba(30,41,59,0.6); border:2px solid rgba(96,165,250,0.2); border-radius:16px; color:white; font-size:15px; outline:none; transition:all 0.25s; }
@@ -41,7 +38,9 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
 .btn { width:100%; padding:16px; background:linear-gradient(135deg,#3b82f6,#8b5cf6); color:white; border:none; border-radius:18px; font-size:16px; font-weight:700; cursor:pointer; margin-top:8px; box-shadow:0 8px 0 #5b21b6, 0 10px 35px rgba(99,102,241,0.5); transition:all 0.12s; display:flex; align-items:center; justify-content:center; gap:8px; text-decoration:none; }
 .btn:active { transform:translateY(4px); box-shadow:0 4px 0 #5b21b6; }
 .btn.ghost { background:transparent; box-shadow:none; border:2px solid rgba(96,165,250,0.35); color:#93c5fd; }
-.btn.danger { background:linear-gradient(135deg,#ef4444,#dc2626); box-shadow:0 8px 0 #991b1b; }.avatar-upload { text-align:center; margin-bottom:16px; }
+.btn.danger { background:linear-gradient(135deg,#ef4444,#dc2626); box-shadow:0 8px 0 #991b1b; }.btn.warn { background:linear-gradient(135deg,#f59e0b,#d97706); box-shadow:0 8px 0 #92400e; }
+.btn.small { padding:10px 14px; font-size:13px; margin-top:0; }
+.avatar-upload { text-align:center; margin-bottom:16px; }
 .avatar-preview { width:90px; height:90px; border-radius:50%; background:linear-gradient(135deg,#3b82f6,#8b5cf6); display:flex; align-items:center; justify-content:center; font-size:36px; font-weight:800; color:white; margin:0 auto 10px; cursor:pointer; border:4px solid rgba(96,165,250,0.4); background-size:cover; background-position:center; position:relative; overflow:hidden; box-shadow:0 0 25px rgba(99,102,241,0.4); }
 .avatar-preview::after { content:'📷'; position:absolute; bottom:0; right:0; background:rgba(0,0,0,0.75); border-radius:50%; width:30px; height:30px; display:flex; align-items:center; justify-content:center; font-size:14px; }
 .avatar-hint { font-size:11px; color:#64748b; }
@@ -51,10 +50,10 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
 .checkbox-row { display:flex; align-items:center; gap:10px; margin-bottom:16px; cursor:pointer; }
 .checkbox-row input { width:20px; height:20px; accent-color:#8b5cf6; }
 .checkbox-row label { font-size:13px; color:#cbd5e1; }
-.app-header { display:flex; align-items:center; justify-content:space-between; padding:14px 16px; background:rgba(15,23,42,0.75); backdrop-filter:blur(20px); border-bottom:1px solid rgba(96,165,250,0.2); position:sticky; top:0; z-index:50; }
+.app-header { display:flex; align-items:center; justify-content:space-between; padding:14px 16px; background:rgba(15,23,42,0.75); border-bottom:1px solid rgba(96,165,250,0.2); position:sticky; top:0; z-index:50; }
 .app-header .title { font-size:20px; font-weight:800; background:linear-gradient(135deg,#60a5fa,#a78bfa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
 .header-btn { width:42px; height:42px; border-radius:50%; background:rgba(96,165,250,0.15); display:flex; align-items:center; justify-content:center; font-size:19px; cursor:pointer; color:#93c5fd; }
-.bottom-tabs { position:fixed; bottom:0; left:0; right:0; max-width:430px; margin:0 auto; background:rgba(15,23,42,0.95); backdrop-filter:blur(20px); border-top:1px solid rgba(96,165,250,0.2); display:flex; padding:8px 0 12px; z-index:60; }
+.bottom-tabs { position:fixed; bottom:0; left:0; right:0; max-width:430px; margin:0 auto; background:rgba(15,23,42,0.95); border-top:1px solid rgba(96,165,250,0.2); display:flex; padding:8px 0 12px; z-index:60; }
 .bottom-tab { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; padding:8px 0; color:#64748b; }
 .bottom-tab.active { color:#8b5cf6; }
 .bottom-tab .icon { font-size:24px; }
@@ -79,7 +78,7 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
 .seen-tick.seen { color:#60a5fa; }
 .reply-preview { background:rgba(59,130,246,0.2); border-right:3px solid #60a5fa; border-radius:10px; padding:6px 10px; margin-bottom:6px; font-size:11px; color:#93c5fd; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .verified-badge { display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; border-radius:50%; background:linear-gradient(135deg,#3b82f6,#8b5cf6); color:white; font-size:10px; font-weight:800; margin-right:4px; vertical-align:middle; }
-.msg-img { max-width:250px; width:100%; border-radius:14px; margin-top:6px; cursor:pointer; display:block; }.chat-input-bar { position:fixed; bottom:70px; left:0; right:0; max-width:430px; margin:0 auto; background:rgba(15,23,42,0.97); backdrop-filter:blur(20px); border-top:1px solid rgba(96,165,250,0.15); padding:10px 12px 14px; display:flex; gap:8px; z-index:58; align-items:center; }
+.msg-img { max-width:250px; width:100%; border-radius:14px; margin-top:6px; cursor:pointer; display:block; }.chat-input-bar { position:fixed; bottom:70px; left:0; right:0; max-width:430px; margin:0 auto; background:rgba(15,23,42,0.97); border-top:1px solid rgba(96,165,250,0.15); padding:10px 12px 14px; display:flex; gap:8px; z-index:58; align-items:center; }
 .chat-input-bar input[type=text] { flex:1; padding:12px 16px; background:rgba(30,41,59,0.85); border:2px solid rgba(96,165,250,0.2); border-radius:24px; color:white; font-size:14px; outline:none; }
 .chat-input-bar input[type=text]:focus { border-color:#60a5fa; }
 .chat-input-bar .send-btn { width:48px; height:48px; border-radius:50%; background:linear-gradient(135deg,#3b82f6,#8b5cf6); color:white; border:none; cursor:pointer; font-size:20px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
@@ -133,14 +132,12 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
 .empty { text-align:center; padding:40px 20px; color:#64748b; font-size:14px; line-height:2; }
 .hidden { display:none !important; }
 </style>
-</head></head>
-<body>
+</head><body>
 
 <div class="bg"></div>
 
 <div class="app">
 
-<!-- ============ صفحه ورود / ثبت‌نام ============ -->
 <div class="screen" id="screen-auth">
   <div class="logo">
     <div class="logo-icon">💬</div>
@@ -342,10 +339,9 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
     </div>
 
     <button class="btn danger" onclick="logout()" style="margin-top:8px;">🚪 خروج از حساب</button>
-  <div>
+  </div>
 
   <div class="bottom-tabs">
-  
     <div class="bottom-tab" id="btab-chat3" onclick="switchBottomTab('chat')">
       <div class="icon">💬</div>
       <div class="lbl">چت</div>
@@ -362,33 +358,33 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
 </div>
 
 </div><!-- ============ سایدبار ============ -->
-<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()" style="position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;z-index:150;"></div>
 
 <div class="sidebar" id="sidebar" style="position:fixed;top:0;right:-100%;width:88%;max-width:360px;height:100vh;background:linear-gradient(180deg,#0a1230,#050818);z-index:200;transition:right 0.3s ease;overflow-y:auto;padding:20px 18px 30px;border-left:1px solid rgba(96,165,250,0.2);">
   <button onclick="closeSidebar()" style="position:absolute;top:16px;left:16px;width:38px;height:38px;border-radius:50%;background:rgba(239,68,68,0.2);color:#f87171;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
 
   <div style="text-align:center;padding:20px 0;margin-top:20px;">
-    <div class="profile-avatar" id="sidebar-avatar" onclick="document.getElementById('sidebar-avatar-input').click()" style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:800;color:white;margin:0 auto 12px;border:4px solid rgba(96,165,250,0.4);background-size:cover;background-position:center;">👤</div>
+    <div id="sidebar-avatar" onclick="document.getElementById('sidebar-avatar-input').click()" style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:800;color:white;margin:0 auto 12px;border:4px solid rgba(96,165,250,0.4);background-size:cover;background-position:center;">👤</div>
     <input type="file" id="sidebar-avatar-input" accept="image/*" style="display:none;" onchange="handleProfileAvatar(event)">
-    <div class="profile-name" id="sidebar-name" style="font-size:22px;font-weight:800;color:#e0e7ff;"></div>
-    <div class="profile-username" id="sidebar-username" style="font-size:14px;color:#60a5fa;margin-top:4px;">@-</div>
-    <div class="profile-bio" id="sidebar-bio" style="font-size:13px;color:#94a3b8;margin-top:10px;line-height:1.7;"></div>
+    <div id="sidebar-name" style="font-size:22px;font-weight:800;color:#e0e7ff;"></div>
+    <div id="sidebar-username" style="font-size:14px;color:#60a5fa;margin-top:4px;">@-</div>
+    <div id="sidebar-bio" style="font-size:13px;color:#94a3b8;margin-top:10px;line-height:1.7;"></div>
   </div>
 
-  <div class="sidebar-section" style="background:rgba(30,41,59,0.4);border:1px solid rgba(96,165,250,0.15);border-radius:16px;padding:14px;margin-top:14px;">
+  <div style="background:rgba(30,41,59,0.4);border:1px solid rgba(96,165,250,0.15);border-radius:16px;padding:14px;margin-top:14px;">
     <h3 style="font-size:14px;color:#60a5fa;margin-bottom:10px;">👥 کاربران</h3>
-    <div class="users-list-mini" id="users-mini-list" style="max-height:280px;overflow-y:auto;">
+    <div id="users-mini-list" style="max-height:280px;overflow-y:auto;">
       <div class="loader">در حال بارگذاری</div>
     </div>
   </div>
 
-  <div class="sidebar-section" style="background:rgba(30,41,59,0.4);border:1px solid rgba(96,165,250,0.15);border-radius:16px;padding:14px;margin-top:14px;">
+  <div style="background:rgba(30,41,59,0.4);border:1px solid rgba(96,165,250,0.15);border-radius:16px;padding:14px;margin-top:14px;">
     <h3 style="font-size:14px;color:#60a5fa;margin-bottom:10px;">👤 اکانت‌های من</h3>
     <div id="accounts-list"></div>
     <button class="btn small ghost" onclick="addNewAccount()" style="margin-top:8px;padding:10px 14px;font-size:13px;">➕ افزودن اکانت</button>
   </div>
 
-  <div class="sidebar-section" style="background:rgba(30,41,59,0.4);border:1px solid rgba(96,165,250,0.15);border-radius:16px;padding:14px;margin-top:14px;">
+  <div style="background:rgba(30,41,59,0.4);border:1px solid rgba(96,165,250,0.15);border-radius:16px;padding:14px;margin-top:14px;">
     <button class="btn small warn" onclick="openAdminLogin()" style="padding:10px 14px;font-size:13px;">🔐 پنل کاربری</button>
   </div>
 
@@ -402,11 +398,11 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
     <div style="display:flex;align-items:center;gap:10px;flex:1;">
       <div id="pv-avatar" style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;background-size:cover;background-position:center;flex-shrink:0;">👤</div>
       <div style="flex:1;overflow:hidden;">
-        <div id="pv-name" style="font-size:15px;font-weight:700;color:#e0e7ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">-</div>
+        <div id="pv-name" style="font-size:15px;font-weight:700;color:#e0e7ff;">-</div>
         <div id="pv-status" style="font-size:11px;color:#10b981;margin-top:2px;">آنلاین</div>
       </div>
     </div>
-    <button class="header-btn" onclick="openReportDialog()" title="گزارش">🚨</button>
+    <button class="header-btn" onclick="openReportDialog()">🚨</button>
   </div>
 
   <div class="chat-room" id="pv-chat-room">
@@ -431,7 +427,7 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
   <input type="file" id="img-input-pv" accept="image/*" style="display:none;" onchange="handleImgSelect(event, 'pv')">
 </div>
 
-<!-- ============ مودال‌ها ============ -->
+<!-- ============ مودال پیام ============ -->
 <div class="modal" id="msg-modal">
   <div class="modal-content">
     <h2 id="modal-title">پیام</h2>
@@ -440,6 +436,7 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
   </div>
 </div>
 
+<!-- ============ مودال ویرایش پروفایل ============ -->
 <div class="modal" id="edit-profile-modal">
   <div class="modal-content">
     <h2>✏️ ویرایش پروفایل</h2>
@@ -456,6 +453,7 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
   </div>
 </div>
 
+<!-- ============ مودال تغییر رمز ============ -->
 <div class="modal" id="change-pass-modal">
   <div class="modal-content">
     <h2>🔑 تغییر رمز</h2>
@@ -472,6 +470,7 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
   </div>
 </div>
 
+<!-- ============ مودال اکانت‌ها ============ -->
 <div class="modal" id="accounts-modal">
   <div class="modal-content">
     <h2>👥 اکانت‌های من</h2>
@@ -481,6 +480,7 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
   </div>
 </div>
 
+<!-- ============ مودال پروفایل کاربر ============ -->
 <div class="modal" id="user-profile-modal">
   <div class="modal-content">
     <div id="user-profile-content"></div>
@@ -488,6 +488,7 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
   </div>
 </div>
 
+<!-- ============ مودال گزارش ============ -->
 <div class="modal" id="report-modal">
   <div class="modal-content">
     <h2>🚨 گزارش کاربر</h2>
@@ -500,6 +501,7 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
   </div>
 </div>
 
+<!-- ============ مودال ورود مدیر ============ -->
 <div class="modal" id="admin-login-modal">
   <div class="modal-content">
     <h2>🛡️ ورود پنل مدیر</h2>
@@ -510,7 +512,8 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
   </div>
 </div>
 
-<div class="admin-panel" id="admin-panel" style="position:fixed;inset:0;background:rgba(0,0,0,0.95);display:none;z-index:300;overflow-y:auto;padding:16px;">
+<!-- ============ پنل مدیریت ============ -->
+<div id="admin-panel" style="position:fixed;inset:0;background:rgba(0,0,0,0.95);display:none;z-index:300;overflow-y:auto;padding:16px;">
   <div style="background:linear-gradient(135deg,#0a1230,#050818);border:1px solid rgba(96,165,250,0.3);border-radius:20px;padding:20px;max-width:440px;margin:0 auto;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(96,165,250,0.2);">
       <h2 style="color:#60a5fa;font-size:18px;">🛡️ پنل مدیریت</h2>
@@ -528,9 +531,9 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
       </div>
     </div>
 
-    <div class="chat-tabs">
-      <div class="chat-tab-btn active" id="admintab-users" onclick="switchAdminTab('users')">👥 کاربران</div>
-      <div class="chat-tab-btn" id="admintab-reports" onclick="switchAdminTab('reports')">🚨 گزارش‌ها</div>
+    <div class="tabs" style="margin-bottom:14px;">
+      <div class="tab-btn active" id="admintab-users" onclick="switchAdminTab('users')">👥 کاربران</div>
+      <div class="tab-btn" id="admintab-reports" onclick="switchAdminTab('reports')">🚨 گزارش‌ها</div>
     </div>
 
     <div id="admin-users-view">
@@ -554,7 +557,7 @@ textarea.input { resize:none; font-family:inherit; min-height:70px; }
   <img id="img-viewer-img" src="" alt="">
 </div>
 
-</body><script>
+</div><script>
 const SUPABASE_URL = 'https://dznjirjgxqfkdulriqxy.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_U4RPxsx_VUcldfgyH46Npw_Xp1xfiol';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -595,17 +598,6 @@ function playNotificationSound() {
     osc1.start(ctx.currentTime);
     osc1.stop(ctx.currentTime + 0.4);
   } catch(e) {}
-}
-
-function requestNotifPermission() {
-  if ('Notification' in window && Notification.permission === 'default') {
-    Notification.requestPermission();
-  }
-}
-function showBrowserNotification(title, body) {
-  if ('Notification' in window && Notification.permission === 'granted') {
-    try { new Notification(title, { body: body }); } catch(e) {}
-  }
 }
 
 function openImgViewer(url) {
@@ -740,7 +732,6 @@ async function doLogin() {
 }
 
 function enterApp() {
-  requestNotifPermission();
   document.getElementById('screen-auth').classList.add('hidden');
   switchBottomTab('chat');
   updateProfileUI();
@@ -809,7 +800,9 @@ function updateProfileUI() {
 async function updateLastSeen() {
   try { await sb.from('users').update({ last_seen: new Date().toISOString() }).eq('id', currentUser.id); } catch(e) {}
 }
-setInterval(() => { if (currentUser) updateLastSeen(); }, 30000);async function loadAllUsers() {
+setInterval(() => { if (currentUser) updateLastSeen(); }, 30000);
+
+async function loadAllUsers() {
   try {
     const { data, error } = await sb.from('users').select('*').order('created_at', { ascending: false });
     if (error) throw error;
@@ -829,7 +822,7 @@ function renderUsersMini() {
     const isMe = u.id === currentUser.id;
     const av = u.avatar_url ? 'background-image:url(' + u.avatar_url + ');' : '';
     const online = isOnline(u);
-    html += '<div class="user-mini" onclick="' + (isMe ? 'closeSidebar()' : 'openUserProfile(' + u.id + ')') + '" style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;margin-bottom:6px;background:rgba(15,23,42,0.6);cursor:pointer;">' +
+    html += '<div onclick="' + (isMe ? 'closeSidebar()' : 'openUserProfile(' + u.id + ')') + '" style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;margin-bottom:6px;background:rgba(15,23,42,0.6);cursor:pointer;">' +
       '<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;' + av + 'background-size:cover;background-position:center;flex-shrink:0;position:relative;">' + (u.avatar_url ? '' : getInitial(u.display_name)) +
         '<div class="' + (online ? 'online-dot' : 'offline-dot') + '"></div>' +
       '</div>' +
@@ -860,7 +853,7 @@ function renderUsersScreen() {
         '<div class="n">' + escapeHtml(u.display_name) + verifiedBadge(u.is_verified) + (u.is_banned ? ' 🚫' : '') + '</div>' +
         '<div class="u">@' + escapeHtml(u.username) + ' • ' + (online ? '🟢 آنلاین' : '⚪ آفلاین') + '</div>' +
       '</div>' +
-      '<button class="btn-pv">💌 چت خصوصی</button>' +
+      '<button class="btn-pv">💌 چت</button>' +
     '</div>';
   });
   if (!count) html = '<div class="empty">هنوز کاربر دیگه‌ای نیست<br><br>لینک رو برای دوستات بفرست</div>';
@@ -883,9 +876,7 @@ function openUserProfile(id) {
       '<button class="btn" onclick="startPvChat(' + u.id + ')" style="margin-top:18px;">💌 شروع چت خصوصی</button>' +
     '</div>';
   document.getElementById('user-profile-modal').classList.add('active');
-}
-
-async function loadMessages() {
+}async function loadMessages() {
   try {
     const { data, error } = await sb.from('global_messages').select('*').order('created_at', { ascending: true }).limit(200);
     if (error) throw error;
@@ -1008,12 +999,9 @@ async function handleImgSelect(event, type) {
     const reply = replyTarget[type];
     if (type === 'group') {
       const insertData = {
-        user_id: currentUser.id,
-        username: currentUser.username,
-        display_name: currentUser.display_name,
-        avatar_url: currentUser.avatar_url || '',
-        text: '',
-        image_url: url
+        user_id: currentUser.id, username: currentUser.username,
+        display_name: currentUser.display_name, avatar_url: currentUser.avatar_url || '',
+        text: '', image_url: url
       };
       if (reply) { insertData.reply_to_id = reply.id; insertData.reply_to_name = reply.name; insertData.reply_to_text = reply.text; }
       await sb.from('global_messages').insert([insertData]);
@@ -1021,13 +1009,9 @@ async function handleImgSelect(event, type) {
     } else {
       const chatId = getPvChatId(currentUser.id, currentPvUser.id);
       const insertData = {
-        chat_id: chatId,
-        from_user_id: currentUser.id,
-        from_name: currentUser.display_name,
-        from_avatar: currentUser.avatar_url || '',
-        to_user_id: currentPvUser.id,
-        text: '',
-        image_url: url
+        chat_id: chatId, from_user_id: currentUser.id, from_name: currentUser.display_name,
+        from_avatar: currentUser.avatar_url || '', to_user_id: currentPvUser.id,
+        text: '', image_url: url
       };
       if (reply) { insertData.reply_to_id = reply.id; insertData.reply_to_name = reply.name; insertData.reply_to_text = reply.text; }
       await sb.from('private_messages').insert([insertData]);
@@ -1050,10 +1034,8 @@ async function sendMessage() {
   const reply = replyTarget.group;
   try {
     const insertData = {
-      user_id: currentUser.id,
-      username: currentUser.username,
-      display_name: currentUser.display_name,
-      avatar_url: currentUser.avatar_url || '',
+      user_id: currentUser.id, username: currentUser.username,
+      display_name: currentUser.display_name, avatar_url: currentUser.avatar_url || '',
       text: text
     };
     if (reply) {
@@ -1083,7 +1065,9 @@ async function markAllAsSeen() {
       try { await sb.from('seen_messages').insert([{ message_id: m.id, message_type: 'global', user_id: currentUser.id }]); } catch(e) {}
     }
   }
-}function buildEmojiPicker() {
+}
+
+function buildEmojiPicker() {
   const grid = document.getElementById('emoji-grid');
   if (!grid) return;
   grid.innerHTML = EMOJIS.map(e => '<div class="emoji-item" onclick="insertEmoji(\'' + e + '\')">' + e + '</div>').join('');
@@ -1102,9 +1086,7 @@ function insertEmoji(emoji) {
   if (!input) return;
   input.value += emoji;
   input.focus();
-}
-
-function getPvChatId(id1, id2) {
+}function getPvChatId(id1, id2) {
   const sorted = [id1, id2].sort((a,b) => a-b);
   return 'pv_' + sorted[0] + '_' + sorted[1];
 }
@@ -1222,7 +1204,6 @@ function subscribePvRealtime() {
       renderPvMessages();
       if (payload.new.from_user_id !== currentUser.id) {
         playNotificationSound();
-        showBrowserNotification('💌 ' + payload.new.from_name, payload.new.text || '📷 عکس');
         sb.from('seen_messages').insert([{ message_id: payload.new.id, message_type: 'pv', user_id: currentUser.id }]).catch(()=>{});
       }
     })
@@ -1348,9 +1329,7 @@ async function changePassword() {
     closeModal('change-pass-modal');
     showModal('✅', 'رمز تغییر کرد');
   } catch(e) { showModal('❌', e.message); }
-}
-
-function renderAccountsModal() {
+}function renderAccountsModal() {
   const list = document.getElementById('accounts-list-modal');
   if (!list) return;
   const accounts = getSavedAccounts();
@@ -1382,7 +1361,9 @@ function renderAccountsList() {
       '</div></div>';
   });
   list.innerHTML = html || '<div style="color:#64748b;font-size:12px;text-align:center;padding:8px;">اکانتی ذخیره نشده</div>';
-}async function switchAccount(username) {
+}
+
+async function switchAccount(username) {
   const accounts = getSavedAccounts();
   const a = accounts.find(x => x.username === username);
   if (!a) return;
@@ -1436,10 +1417,10 @@ function checkAdminPass() {
   } else { showModal('❌', 'رمز اشتباه'); }
 }
 function openAdminPanel() {
-  document.getElementById('admin-panel').classList.add('active');
+  document.getElementById('admin-panel').style.display = 'block';
   renderAdminUsers(); renderAdminReports(); loadStats(); loadReports();
 }
-function closeAdminPanel() { document.getElementById('admin-panel').classList.remove('active'); }
+function closeAdminPanel() { document.getElementById('admin-panel').style.display = 'none'; }
 function switchAdminTab(tab) {
   document.getElementById('admintab-users').classList.toggle('active', tab === 'users');
   document.getElementById('admintab-reports').classList.toggle('active', tab === 'reports');
@@ -1580,10 +1561,7 @@ function subscribeRealtime() {
       allMessagesCache.push(payload.new);
       renderMessages();
       updateProfileUI();
-      if (payload.new.user_id !== currentUser.id) {
-        playNotificationSound();
-        showBrowserNotification('💬 ' + payload.new.display_name, payload.new.text || '📷 عکس');
-      }
+      if (payload.new.user_id !== currentUser.id) playNotificationSound();
     })
     .on('postgres_changes', { event:'DELETE', schema:'public', table:'global_messages' }, payload => {
       allMessagesCache = allMessagesCache.filter(m => m.id !== payload.old.id);
@@ -1629,13 +1607,6 @@ window.addEventListener('popstate', () => {
     closePvChat();
   }
 });
-</script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/storm-chat/sw.js').catch(() => {});
-  });
-}
 </script>
 </body>
 </html>
