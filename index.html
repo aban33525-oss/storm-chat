@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>چت پلاس 💬</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<style>
+<link rel="manifest" href="/storm-chat/manifest.json">
+<meta name="theme-color" content="#3b82f6">
+<link rel="icon" type="image/png" href="https://aban33525-oss.github.io/storm-chat/icon-192.png">
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Vazirmatn',Tahoma,sans-serif; -webkit-tap-highlight-color:transparent; }
 html { font-size:16px; -webkit-text-size-adjust:100%; text-size-adjust:100%; }
@@ -1627,6 +1629,13 @@ window.addEventListener('popstate', () => {
     closePvChat();
   }
 });
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/storm-chat/sw.js').catch(() => {});
+  });
+}
 </script>
 </body>
 </html>
