@@ -1746,6 +1746,7 @@ function logout() {
   document.getElementById('login-password').value = '';
   closeSidebar();
 }window.addEventListener('load', () => {
+  
   const accounts = getSavedAccounts();
   if (accounts.length > 0) {
     document.getElementById('login-username').value = accounts[accounts.length-1].username;
