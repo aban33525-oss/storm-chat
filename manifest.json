@@ -1,0 +1,27 @@
+{
+  "name": "چت پلاس",
+  "short_name": "چت پلاس",
+  "description": "چت روم سریع و امن - چت گروهی و خصوصی",
+  "start_url": "/storm-chat/",
+  "scope": "/storm-chat/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0e27",
+  "theme_color": "#3b82f6",
+  "lang": "fa",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "https://aban33525-oss.github.io/storm-chat/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://aban33525-oss.github.io/storm-chat/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
