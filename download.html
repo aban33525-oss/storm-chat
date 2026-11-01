@@ -5,73 +5,187 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دانلود اپلیکیشن چت پلاس | پیام‌رسان فارسی</title>
     <meta name="description" content="دانلود اپلیکیشن چت پلاس، پیام‌رسان مدرن و امن فارسی با قابلیت چت گروهی، چت خصوصی و ارسال عکس.">
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Vazirmatn', sans-serif;
             background-color: #0a0a1f;
-            color: white;
+            color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            margin: 0;
-            text-align: center;
+            overflow-x: hidden;
+            position: relative;
         }
+
+        /* افکت پس‌زمینه نورانی */
+        .bg-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(124, 92, 255, 0.4) 0%, rgba(10, 10, 31, 0) 70%);
+            z-index: 0;
+            filter: blur(60px);
+        }
+
         .container {
-            background: #12122e;
-            padding: 40px 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(124, 92, 255, 0.2);
-            max-width: 400px;
+            position: relative;
+            z-index: 1;
+            background: rgba(22, 22, 46, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(124, 92, 255, 0.2);
+            max-width: 420px;
             width: 90%;
-            border: 1px solid #2a2a52;
+            text-align: center;
+            animation: slideUp 0.8s ease-out;
         }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .icon {
-            width: 100px;
-            height: 100px;
-            border-radius: 20px;
+            width: 110px;
+            height: 110px;
+            border-radius: 24px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(124, 92, 255, 0.4);
+            box-shadow: 0 0 30px rgba(124, 92, 255, 0.6);
+            transition: transform 0.3s ease;
         }
-        h1 { margin: 10px 0; font-size: 24px; }
-        p { color: #b8b8d8; font-size: 14px; line-height: 1.6; margin-bottom: 30px; }
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 15px;
+
+        .icon:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        h1 { 
+            margin: 10px 0; 
+            font-size: 28px; 
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle { 
+            color: #b8b8d8; 
+            font-size: 14px; 
+            margin-bottom: 25px;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+
+        .feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #d1d1e9;
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            background: rgba(124, 92, 255, 0.15);
+            padding: 10px;
             border-radius: 12px;
+            box-shadow: inset 0 0 10px rgba(124, 92, 255, 0.2);
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 18px;
+            border-radius: 16px;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-            transition: transform 0.2s;
+            font-weight: 700;
+            font-size: 17px;
+            color: #ffffff;
+            background: linear-gradient(135deg, #7c5cff, #4f8cff);
+            box-shadow: 0 10px 25px rgba(124, 92, 255, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .btn:active { transform: scale(0.95); }
-        .btn-myket {
-            background: linear-gradient(135deg, #0055ff, #00aaff);
-            color: white;
+
+        /* افکت دکمه */
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.5s;
         }
-        .btn-direct {
-            background: #2a2a52;
-            color: white;
-            border: 1px solid #7c5cff;
+
+        .btn:hover::before { left: 100%; }
+        
+        .btn:active { 
+            transform: scale(0.96); 
+            box-shadow: 0 5px 15px rgba(124, 92, 255, 0.3);
+        }
+
+        .meta-info {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #7a7a9e;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
         }
     </style>
 </head>
 <body>
+    <div class="bg-glow"></div>
+
     <div class="container">
         <img src="icon-512.png" alt="لوگو چت پلاس" class="icon">
         
         <h1>چت پلاس</h1>
-        <p>پیام‌رسان مدرن فارسی با امکانات کامل<br>چت گروهی، چت خصوصی، ارسال عکس و پنل مدیریت</p>
+        <p class="subtitle">پیام‌رسان مدرن و امن فارسی</p>
 
-        <!-- دکمه مایکت (فعلا غیرفعاله تا لینکش بیاد) -->
-        <a href="#" class="btn btn-myket">📥 دانلود از مایکت (به‌زودی)</a>
+        <!-- ویژگی‌های برنامه -->
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <span>سریع و روان</span>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💬</div>
+                <span>چت خصوصی و گروهی</span>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🛡️</div>
+                <span>امنیت بالا</span>
+            </div>
+        </div>
 
-        <!-- دکمه دانلود مستقیم (لینک گوگل درایو تو) -->
-        <a href="https://drive.google.com/uc?export=download&id=1jo5aGMi37nxBk0r1AZnKO7gCeMiMYy23" class="btn btn-direct">🌐 دانلود مستقیم فایل (APK)</a>
+        <!-- دکمه دانلود (لینک گوگل درایو خودت را اینجا جایگزین کن) -->
+        <a href="https://drive.google.com/uc?export=download&id=1jo5aGMi37nxBk0r1AZnKO7gCeMiMYy23" class="btn">
+            <span>⬇️</span> دانلود مستقیم برنامه (APK)
+        </a>
+
+        <div class="meta-info">
+            <span>نسخه ۱.۰.۱</span>
+            <span>|</span>
+            <span>حجم: ۳۲ مگابایت</span>
+        </div>
     </div>
 </body>
 </html>
